@@ -4,22 +4,22 @@ def calcular_gravedad(h: float, t: float, h0: float = 10.0) -> float:
     """
     Calcula la gravedad en función de la altura y el tiempo.
 
-    :param h: Altura inicial (en metros)
-    :param t: Tiempo transcurrido (en segundos)
-    :param h0: Altura final (en metros)
-    :return: Gravedad calculada (en m/s^2)
+    h: Altura inicial (en metros)
+    t: Tiempo transcurrido (en segundos)
+    h0: Altura final (en metros)
+    return: Gravedad calculada (en m/s^2)
     """
     if t <= 0:
         return None  # Evitar división por cero o tiempo negativo
-    return(2 * (h - h0) / (t ** 2))
+    return (2 * (h0 - h)) / (t ** 2)
 
 def calcular_estadistica (lista_g: list [float], g_ref: float = 9.81) -> dict:
     """
     Calcula estadísticas de una lista de valores de gravedad.
 
-    :param lista_g: Lista de valores de gravedad (en m/s^2)
-    :param g_ref: Valor de referencia de gravedad (en m/s^2)
-    :return: Diccionario con estadísticas calculadas
+    lista_g: Lista de valores de gravedad (en m/s^2)
+     g_ref: Valor de referencia de gravedad (en m/s^2)
+    return: Diccionario con estadísticas calculadas
     """
     n = len(lista_g)
     if n == 0:  
@@ -93,8 +93,9 @@ def procesar_experimento(ruta_csv: Path, h0: float = 10.0) -> tuple[list, dict]:
 
         #Validaciones físicas 
 
-        if t <= 0 or h < 0 or incertidumbre < 0:
-            raise ValueError(f"Línea {idx}:inválida: Violación de límites físicos (t={t}, h={h}, incertidumbre={incertidumbre}).")
+        # Validaciones físicas corregidas
+        if t < 0 or h < 0 or h > h0 or incertidumbre < 0:
+            raise ValueError(f"Línea {idx}: Inválida por límites físicos.")
 
         if t <= t_anterior:
             raise ValueError(f"Línea {idx}: El tiempo debe ser estrictamente creciente (t={t}, t_anterior={t_anterior}).")
@@ -113,8 +114,8 @@ def imprimir_reporte(filas: list, est: dict):
     """
     Imprime un reporte de los resultados del experimento.
 
-    :param filas: Lista de tuplas con datos válidos (tiempo, altura, incertidumbre, gravedad)
-    :param est: Diccionario con estadísticas calculadas
+    filas: Lista de tuplas con datos válidos (tiempo, altura, incertidumbre, gravedad)
+    est: Diccionario con estadísticas calculadas
     """
     print ("\n" + "=" * 50)
     print (f"{'TABLA DE DATOS CALCULADOS':^50}")
@@ -132,9 +133,9 @@ def imprimir_reporte(filas: list, est: dict):
         print(f"Filas procesadas con éxito: {est['n']}")
         print(f"Media muestral de g:         {est['media']:.4f} m/s²")
         print(f"Desviación estándar (pob):   {est['desviacion']:.4f} m/s²")
-        print(f"Valor Mínimo:                {est['min']:.4f} m/s²")
-        print(f"Valor Máximo:                {est['max']:.4f} m/s²")
+        print(f"Valor Mínimo:                {est['valor_min']:.4f} m/s²")
+        print(f"Valor Máximo:                {est['valor_max']:.4f} m/s²")
         print(f"Rango de estimaciones:       {est['rango']:.4f} m/s²")
-        print(f"Diferencia Absoluta (vs 9.81): {est['err_abs']:.4f} m/s²")
-        print(f"Error Relativo:              {est['err_rel']:.4%}")
+        print(f"Diferencia Absoluta (vs 9.81): {est['error_absolute']:.4f} m/s²")
+        print(f"Error Relativo:              {est['error_relative']:.4%}")
         print("="*50)
