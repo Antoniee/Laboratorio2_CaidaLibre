@@ -136,6 +136,19 @@ def imprimir_reporte(filas: list, est: dict):
         print(f"Valor Mínimo:                {est['valor_min']:.4f} m/s²")
         print(f"Valor Máximo:                {est['valor_max']:.4f} m/s²")
         print(f"Rango de estimaciones:       {est['rango']:.4f} m/s²")
-        print(f"Diferencia Absoluta (vs 9.81): {est['error_absolute']:.4f} m/s²")
-        print(f"Error Relativo:              {est['error_relative']:.4%}")
+        print(f"Diferencia Absoluta (vs 9.81): {est['error_absoluto']:.4f} m/s²")
+        print(f"Error Relativo:              {est['error_relativo']:.2f}%")
         print("="*50)
+
+if __name__ == "__main__":
+    archivo_real = Path ("caida_libre_sintetica.csv")
+    if archivo_real.exists():
+        try:
+            filas, est = procesar_experimento(archivo_real )
+            imprimir_reporte(filas, est)
+        except Exception as e:
+                print (f"Error al proceso: {e}")
+
+    else:
+        
+        print (f"No se pudo encontrar el archivo {archivo_real}")
