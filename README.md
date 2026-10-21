@@ -1,4 +1,4 @@
-#Laboratorio 2 -Caída Libre en Python 
+##Laboratorio 2 -Caída Libre en Python 
 
 Este repositorio contiene el desarrollo e implementación en Python  para el cálculo de la aceleración de la gravedad (g) a partir de datos sintéticos de caida libre, proveniente de un archivo csv (Caida_libre_sintetica.csv)
 
