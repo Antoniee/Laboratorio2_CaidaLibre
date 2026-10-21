@@ -5,7 +5,7 @@ Desarrollado por: [María Antonia Cardozo Forero]
 
 **Commit Evaluable:**[]
 
-##Objetivos
+## Objetivos
 *leer y validar un CSV con la biblioteca estándar;
 *separar lectura, validación, cálculo y presentación en funciones propias;
 *estimar y resumir g con unidades;
@@ -44,9 +44,9 @@ Donde los supuestos físicos asumidos son:
 3. El campo gravitatorio es perfectamente uniforme y constante durante la trayectoria.
 
 
-##2. Resultados númericos
+## 2. Resultados númericos
 
-###Tabla de datos procesados 
+### Tabla de datos procesados 
 * **Altura Inicial (h₀):** 10.00 m
 * **Muestra Original:** 15 filas detectadas.
 
@@ -85,7 +85,7 @@ Error Relativo:              2.16%
 ### Métricas Estadísticas Consolidadas
 * **Número de mediciones útiles (N):** 14
 * **Media Obtenida (ḡ):** 10.0216 m/s²
-* **Desviación Estándar Poblacional (σ):** 0.5631 m/s²
+* **Desviación Estándar (σ):** 0.5631 m/s²
 * **Rango Dinámico (Máx - Mín):** 2.5000 m/s² (Desde 9.5000 hasta 12.0000)
 * **Diferencia Absoluta:** 0.2116 m/s²
 * **Error Relativo Porcentual:** 2.1573%
