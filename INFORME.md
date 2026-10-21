@@ -40,7 +40,7 @@ $$h(t) = h_0 - \frac{g \cdot t^2}{2}$$
 
 Donde los supuestos físicos asumidos son:
 1. El cuerpo parte estrictamente desde el reposo absoluto (v₀ = 0).
-2. Se desprecia por completo la resistencia aerodinámica o fricción del aire.
+2. Se desprecia por completo la resistencia del aire. 
 3. El campo gravitatorio es perfectamente uniforme y constante durante la trayectoria.
 
 
@@ -78,11 +78,11 @@ Donde los supuestos físicos asumidos son:
 ## 3. Conclusiones y Limitaciones 
 
 ### Análisis de Sensibilidad en Tiempos Cortos
-El valor anómalo de 12.0000 m/s² en t = 0.1 s se debe a que la variable temporal se encuentra elevada al cuadrado en el denominador de la ecuación despejada: \(g_i = \frac{2(h_0-h_i)}{t_i^2}\). Al ser un número extremadamente pequeño (0.01 s²), cualquier incertidumbre física en el sensor de altura (los ± 0.03 m informados) se magnifica de forma hiperbólica, afectando los cálculos iniciales.
+El valor anómalo de 12.0000 m/s² en t = 0.1 s se debe a que la variable temporal se encuentra elevada al cuadrado en el denominador de la ecuación despejada: $$g_i = \frac{2(h_0-h_i)}{t_i^2}$$. Al ser un número extremadamente pequeño (0.01 s²), cualquier incertidumbre física en el sensor de altura (los ± 0.03 m informados) se magnifica de forma hiperbólica, afectando los cálculos iniciales.
 
 ### Criterio de Compatibilidad 
 Considero que el resultado de los cálculos **es compatible** con el valor teórico de referencia (9.81 m/s²) porque dicho valor se encuentra contenido dentro del intervalo de dispersión natural de los datos determinado por la desviación estándar poblacional:
-\[[\bar{g} - \sigma, \bar{g} + \sigma] \rightarrow [10.0216 - 0.5631, 10.0216 + 0.5631] \rightarrow [9.4585, 10.5847]\text{ m/s}^2\]
+$$[\bar{g} - \sigma, \bar{g} + \sigma] \rightarrow [10.0216 - 0.5631, 10.0216 + 0.5631] \rightarrow [9.4585, 10.5847]\text{ m/s}^2$$
 
 ### Limitaciones 
 La principal limitación está en la resolución y sensibilidad del instrumento de medición en la primera fracción del movimiento (tramo inicial de la caída). Una validación basada en descartar intervalos de tiempo excesivamente cortos (t < 0.15 s) protegería la consistencia física del resultado global del informe.
@@ -96,7 +96,7 @@ El programa desarrollado permitió obtener:
 * **Caso Archivo Vacío:** Bloqueado con éxito mediante excepción `ValueError`.
 * **Caso Tipo de Dato Inválido:** Identifcado con éxito localizando el índice de la fila no apta de texto.
 
-* **Caso Tiempo No Monótono Creciente:** Detectado inmediatamente al evaluar la condición \(t_i \le t_{i-1}\).
+* **Caso Tiempo No Monótono Creciente:** Detectado inmediatamente al evaluar la condición $$t_i \le t_{i-1}$$.
 
 ### Contribución 
 * Se diseñó e implementó la función de validación de límites físicos de altura (0 ≤ h ≤ h₀) y la conversión limpia de tipos flotantes. También se  diseñó la lógica de comparación temporal estricta y se estructuró la impresión formateada de tablas.

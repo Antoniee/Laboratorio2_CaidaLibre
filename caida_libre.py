@@ -93,7 +93,7 @@ def procesar_experimento(ruta_csv: Path, h0: float = 10.0) -> tuple[list, dict]:
 
         #Validaciones físicas 
 
-        # Validaciones físicas corregidas
+      
         if t < 0 or h < 0 or h > h0 or incertidumbre < 0:
             raise ValueError(f"Línea {idx}: Inválida por límites físicos.")
 

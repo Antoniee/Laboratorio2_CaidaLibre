@@ -4,8 +4,8 @@ Este repositorio contiene el desarrollo e implementación en Python  para el cá
 
 ## Documentación del Proyecto 
 
-1. **Informe del laboratorio:**[]
-2. **Vídeo explicativo:**
+1. **Informe del laboratorio:**[INFORME.md]
+2. **Vídeo explicativo:** https://youtu.be/fjGiPEUt3IU 
 
 
 ## Instrucciones de uso y ejecución
