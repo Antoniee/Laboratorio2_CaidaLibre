@@ -44,43 +44,28 @@ Donde los supuestos físicos asumidos son:
 3. El campo gravitatorio es perfectamente uniforme y constante durante la trayectoria.
 
 
-## 2. Resultados númericos
+## 2. Resultados 
 
 ### Tabla de datos procesados 
 * **Altura Inicial (h₀):** 10.00 m
 * **Muestra Original:** 15 filas detectadas.
 
-==================================================
-            TABLA DE DATOS CALCULADOS
-==================================================
-t (s)     h (m)     Incert (m)  g_i (m/s²)
---------------------------------------------------
-0.1000    9.94      0.0300      12.0000
-0.2000    9.81      0.0300      9.5000
-0.3000    9.55      0.0300      10.0000
-0.4000    9.20      0.0300      10.0000
-0.5000    8.77      0.0300      9.8400
-0.6000    8.23      0.0300      9.8333
-0.7000    7.60      0.0300      9.7959
-0.8000    6.85      0.0300      9.8438
-0.9000    6.01      0.0300      9.8519
-1.0000    5.06      0.0300      9.8800
-1.1000    3.99      0.0300      9.9339
-1.2000    2.82      0.0300      9.9722
-1.3000    1.52      0.0300      10.0355
-1.4000    0.38      0.0300      9.8163
-==================================================
-             RESUMEN ESTADÍSTICO (g)
-==================================================
-Filas procesadas con éxito: 14
-Media muestral de g:         10.0216 m/s²
-Desviación estándar (pob):   0.5631 m/s²
-Valor Mínimo:                9.5000 m/s²
-Valor Máximo:                12.0000 m/s²
-Rango de estimaciones:       2.5000 m/s²
-Diferencia Absoluta (vs 9.81): 0.2116 m/s²
-Error Relativo:              2.16%
-==================================================
+| Tiempo \(t\) (s) | Altura \(h\) (m) | Incertidumbre (m) | Gravedad \(g_i\) (\(\text{m/s}^2\)) | Estado / Observación Física |
+| :--- | :--- | :--- | :--- | :--- |
+| 0.1000 | 9.94 | 0.0300 | **12.0000** | Inestabilidad crítica por tiempo corto |
+| 0.2000 | 9.81 | 0.0300 | 9.5000 | Fluctuación transitoria instrumental |
+| 0.3000 | 9.55 | 0.0300 | 10.0000 | Estabilización y convergencia |
+| 0.4000 | 9.20 | 0.0300 | 10.0000 | Estabilización y convergencia |
+| 0.5000 | 8.77 | 0.0300 | 9.8400 | Alta estabilidad experimental |
+| 0.6000 | 8.23 | 0.0300 | 9.8333 | Alta estabilidad experimental |
+| 0.7000 | 7.60 | 0.0300 | 9.7959 | Máxima aproximación al valor teórico |
+| 0.8000 | 6.85 | 0.0300 | 9.8438 | Comportamiento asintótico estable |
+| 0.9000 | 6.01 | 0.0300 | 9.8519 | Comportamiento asintótico estable |
+| 1.0000 | 5.06 | 0.0300 | 9.8800 | Comportamiento asintótico estable |
+| 1.1000 | 3.99 | 0.0300 | 9.9339 | Incremento leve al final del tramo |
+| 1.2000 | 2.82 | 0.0300 | 9.9722 | Incremento leve al final del tramo |
+| 1.3000 | 1.52 | 0.0300 | 10.0355 | Zona previa al impacto |
+| 1.4000 | 0.38 | 0.0300 | 9.8163 | Retorno preciso a la referencia |
 
 ### Métricas Estadísticas Consolidadas
 * **Número de mediciones útiles (N):** 14
@@ -89,3 +74,33 @@ Error Relativo:              2.16%
 * **Rango Dinámico (Máx - Mín):** 2.5000 m/s² (Desde 9.5000 hasta 12.0000)
 * **Diferencia Absoluta:** 0.2116 m/s²
 * **Error Relativo Porcentual:** 2.1573%
+
+## 3. Conclusiones y Limitaciones 
+
+### Análisis de Sensibilidad en Tiempos Cortos
+El valor anómalo de 12.0000 m/s² en t = 0.1 s se debe a que la variable temporal se encuentra elevada al cuadrado en el denominador de la ecuación despejada: \(g_i = \frac{2(h_0-h_i)}{t_i^2}\). Al ser un número extremadamente pequeño (0.01 s²), cualquier incertidumbre física en el sensor de altura (los ± 0.03 m informados) se magnifica de forma hiperbólica, afectando los cálculos iniciales.
+
+### Criterio de Compatibilidad 
+Considero que el resultado de los cálculos **es compatible** con el valor teórico de referencia (9.81 m/s²) porque dicho valor se encuentra contenido dentro del intervalo de dispersión natural de los datos determinado por la desviación estándar poblacional:
+\[[\bar{g} - \sigma, \bar{g} + \sigma] \rightarrow [10.0216 - 0.5631, 10.0216 + 0.5631] \rightarrow [9.4585, 10.5847]\text{ m/s}^2\]
+
+### Limitaciones 
+La principal limitación está en la resolución y sensibilidad del instrumento de medición en la primera fracción del movimiento (tramo inicial de la caída). Una validación basada en descartar intervalos de tiempo excesivamente cortos (t < 0.15 s) protegería la consistencia física del resultado global del informe.
+
+
+## 4. Evidencias
+
+### Registro de Pruebas de Software Realizadas
+El programa desarrollado permitió obtener: 
+
+* **Caso Archivo Vacío:** Bloqueado con éxito mediante excepción `ValueError`.
+* **Caso Tipo de Dato Inválido:** Identifcado con éxito localizando el índice de la fila no apta de texto.
+
+* **Caso Tiempo No Monótono Creciente:** Detectado inmediatamente al evaluar la condición \(t_i \le t_{i-1}\).
+
+### Contribución 
+* Se diseñó e implementó la función de validación de límites físicos de altura (0 ≤ h ≤ h₀) y la conversión limpia de tipos flotantes. También se  diseñó la lógica de comparación temporal estricta y se estructuró la impresión formateada de tablas.
+
+### Diferencia Conceptual: `return` vs `print`
+* **`return`:** Es una instrucción fundamental que finaliza la ejecución de una función y devuelve un valor o dato útil hacia el bloque de código principal. Esto permite que el número calculado sea guardado en una variable o reutilizado en otras fórmulas matemáticas (por ejemplo, pasar el resultado de la gravedad a la función estadística).
+* **`print`:** Es un  efecto secundario visual. Muestra caracteres de texto en la pantalla para que una perosna pueda leerlos, pero ese valor no es almacenable ni procesable por ninguna otra función matemática dentro del flujo lógico del programa; para éste, el dato deja de existir.
