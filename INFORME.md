@@ -3,7 +3,7 @@
 **Autora:**
 Desarrollado por: [María Antonia Cardozo Forero]
 
-**Commit Evaluable:**[]
+**Commit Evaluable:**[f64f816]
 
 ## Objetivos
 *leer y validar un CSV con la biblioteca estándar;
